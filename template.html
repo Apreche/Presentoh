@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <title>{{ presentation_title }}</title>
+</head>
+<link rel="stylesheet" type="text/css" href="../css/presentation.css" />
+<script src="../js/jquery-1.4.2.min.js"></script>
+<script src="../js/jquery.hotkeys.js"></script>
+<script>
+    {% if slide.next %}
+        function next(){
+            var next = '{{slide.next}}.html';
+            window.location = next;
+        }
+    {% endif %}
+    {% if slide.prev %}
+        function prev(){
+            var prev = '{{slide.prev}}.html';
+            window.location = prev;
+    }
+    {% endif %}
+function bindall(){
+    {% if slide.next %}
+    {% for key in forward_keys %}
+        jQuery(document).bind('keydown', '{{key}}', function (evt){next();});
+    {% endfor %}
+    {% endif %}
+    {% if slide.prev %}
+    {% for key in back_keys %}
+        jQuery(document).bind('keydown', '{{key}}', function (evt){prev();});
+    {% endfor %}
+    {% endif %}
+}
+jQuery(document).ready(bindall);
+</script>
+<body>
+    <div id="wrapper">
+        {% if title %}
+            <h1>{{ slide.content }}</h1>
+        {% endif %}
+
+        {% if image %}
+            <img src="../img/{{ slide.image_name }}" />
+        {% endif %}
+
+        {% if list %}
+            <h2>{{ slide.list_heading }}</h2>
+            <ul>
+            {% for bullet in slide.bullets %}
+                <li>{{ bullet }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if video %}
+        <video src="../video/{{ slide.video_name }}" controls="controls" autoplay="autoplay" {% if slide.video_width %}width="{{ slide.video_width }}"{% endif %} {% if slide.video_height %}height="{{ slide.video_height }}"{% endif %}>
+        {% endif %}
+    </div>
+</body>
+</html>
