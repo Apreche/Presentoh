@@ -3,9 +3,9 @@
 <head>
     <title>{{ presentation_title }}</title>
 </head>
-<link rel="stylesheet" type="text/css" href="../css/presentation.css" />
-<script src="../js/jquery-1.4.2.min.js"></script>
-<script src="../js/jquery.hotkeys.js"></script>
+<link rel="stylesheet" type="text/css" href="css/presentation.css" />
+<script src="js/jquery-1.4.2.min.js"></script>
+<script src="js/jquery.hotkeys.js"></script>
 <script>
     {% if slide.next %}
         function next(){
@@ -40,7 +40,7 @@ jQuery(document).ready(bindall);
         {% endif %}
 
         {% if image %}
-            <img src="../img/{{ slide.image_name }}" />
+            <img src="img/{{ slide.image_name }}" />
         {% endif %}
 
         {% if list %}
@@ -53,7 +53,7 @@ jQuery(document).ready(bindall);
         {% endif %}
 
         {% if video %}
-        <video src="../video/{{ slide.video_name }}" controls="controls" autoplay="autoplay" {% if slide.video_width %}width="{{ slide.video_width }}"{% endif %} {% if slide.video_height %}height="{{ slide.video_height }}"{% endif %}>
+        <video src="video/{{ slide.video_name }}" controls="controls" autoplay="autoplay" {% if slide.video_width %}width="{{ slide.video_width }}"{% endif %} {% if slide.video_height %}height="{{ slide.video_height }}"{% endif %}>
         {% endif %}
     </div>
 </body>
