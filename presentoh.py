@@ -1,11 +1,21 @@
 #!/usr/bin/env python
 
-import os, sys
+import os, sys, errno
 
 UTIL_ROOT = os.path.join(os.path.dirname(__file__), 'utils')
 sys.path.insert(0, UTIL_ROOT)
 
 import simplejson as json
+
+# create output dir(s) if necessary
+output_dir = sys.argv[2]
+try:
+    os.makedirs(output_dir)
+except OSError as exc:
+    if exc.errno == errno.EEXIST:
+        pass
+    else:
+        raise exc
 
 # parse json
 json_filename = sys.argv[1]
@@ -21,8 +31,8 @@ template_text = open('template.html').read()
 template = Template(template_text)
 
 for slide in data['slides']:
-    slide_name = "slides/%s.html" % slide['name']
-    f = open(slide_name, 'w')
+    slide_name = "%s/%s.html" % (output_dir, slide['name'])
+    f = open(slide_name, 'w+')
     context = {
         'presentation_title': presentation_title,
         'forward_keys': forward_keys,
