@@ -4,30 +4,19 @@
     "back_keys": ["pageup", "left", "backspace", "h"],
     "slides": [
         {
-            "name": "first",
-            "next": "second",
             "type": "title",
             "content": "First Slide"
         }, 
         {
-            "name": "second",
-            "prev": "first",
-            "next": "third", 
             "type": "video",
             "video_name": "city.mp4",
             "video_width": "100%"
         },
         {
-            "name": "third",
-            "prev": "second",
-            "next": "fourth",
             "type": "image",
             "image_name": "foo.jpg"
         },
         {
-            "name": "fourth",
-            "prev": "third",
-            "next": "last",
             "type": "list",
             "list_heading": "Nice Items",
             "bullets": [
@@ -37,11 +26,8 @@
             ]
         },
         {
-            "name": "last",
-            "prev": "fourth",
             "type": "title",
             "content": "Last Slide. Thank You."
         }
     ]
 }
-

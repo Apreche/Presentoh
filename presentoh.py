@@ -38,7 +38,16 @@ from jinja2 import Template
 template_text = open('template.html').read()
 template = Template(template_text)
 
-for slide in data['slides']:
+num_slides = len(data['slides'])
+for index, slide in enumerate(data['slides']):
+    if index > 0:
+        prev = index - 1
+        slide['prev'] = "%s" % prev
+    if (index + 1) < num_slides:
+        next = index + 1
+        slide['next'] = "%s" % next
+    slide['name'] = "%s" % index 
+
     slide_name = "%s/%s.html" % (output_dir, slide['name'])
     f = open(slide_name, 'w+')
     context = {
