@@ -8,17 +8,42 @@
 <script src="js/jquery.hotkeys.js"></script>
 <script src="js/maxsize.js"></script>
 <script>
+    {% if slide.type == 'video' %}
+    var playing = true;
+    {% endif %}
     {% if slide.next %}
         function next(){
-            var next = '{{slide.next}}.html';
-            window.location = next;
+            {% if slide.type == 'video' %}
+                if (playing)
+                {
+                    jQuery('video').get(0).pause()
+                    playing = false;
+                } else {
+                    var next = '{{slide.next}}.html';
+                    window.location = next;
+                }
+            {% else %}
+                var next = '{{slide.next}}.html';
+                window.location = next;
+            {% endif %}
         }
     {% endif %}
     {% if slide.prev %}
         function prev(){
-            var prev = '{{slide.prev}}.html';
-            window.location = prev;
-    }
+            {% if slide.type == 'video' %}
+                if (playing)
+                {
+                    var prev = '{{slide.prev}}.html';
+                    window.location = prev;
+                } else {
+                    jQuery('video').get(0).play()
+                    playing = true;
+                }
+            {% else %}
+                var prev = '{{slide.prev}}.html';
+                window.location = prev;
+            {% endif %}
+        }
     {% endif %}
 function bindall(){
     {% if slide.next %}
