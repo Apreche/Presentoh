@@ -2,22 +2,22 @@
 
 import os, sys, errno, shutil
 
-UTIL_ROOT = os.path.join(os.path.dirname(__file__), 'utils')
+CURRENT_DIR = os.path.dirname(__file__)
+UTIL_ROOT = os.path.join(CURRENT_DIR, 'utils')
 sys.path.insert(0, UTIL_ROOT)
 
 import simplejson as json
 
 # create output dir(s) if necessary
-output_dir = sys.argv[2]
 try:
-    os.makedirs(output_dir)
-    os.makedirs("%s/video" % output_dir)
-    os.makedirs("%s/img" % output_dir)
-except OSError as exc:
-    if exc.errno == errno.EEXIST:
-        pass
-    else:
-        raise exc
+    output_dir = sys.argv[2]
+except IndexError:
+    output_dir = os.path.join(CURRENT_DIR, 'example')
+if os.path.isdir(output_dir):
+    shutil.rmtree(output_dir)
+os.makedirs(output_dir)
+os.makedirs("%s/video" % output_dir)
+os.makedirs("%s/img" % output_dir)
 
 # move all css and js
 src, dest = "css", "%s/css" % output_dir 
@@ -26,7 +26,10 @@ src, dest = "js", "%s/js" % output_dir
 shutil.copytree(src, dest)
 
 # parse json
-json_filename = sys.argv[1]
+try:
+    json_filename = sys.argv[1]
+except IndexError:
+    json_filename = 'example.json'
 json_file = open(json_filename)
 data = json.load(json_file)
 
