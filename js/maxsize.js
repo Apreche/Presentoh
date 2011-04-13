@@ -29,6 +29,13 @@ function maxresize(){
 		$('img').height('95%');
 	}
 	$('#debug').html('foo');
+
+    $('video').css({
+        position:'absolute',
+        left: (ww - $('video').outerWidth())/2,
+        top: (wh - $('video').outerHeight())/2
+    });
+
 }
 
 $(document).ready(function() {
