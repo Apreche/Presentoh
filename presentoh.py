@@ -32,6 +32,7 @@ except IndexError:
     json_filename = 'example.json'
 json_file = open(json_filename)
 data = json.load(json_file)
+shutil.copy(json_filename, "%s/%s" % (output_dir, json_filename))
 
 presentation_title = data['presentation_title']
 forward_keys = data['forward_keys']
